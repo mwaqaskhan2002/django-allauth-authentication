@@ -1,0 +1,10 @@
+Hello {{ user.username }}!
+
+Thank you for signing up! Please confirm your email address.
+
+Click the link below to confirm:
+{{ activate_url }}
+
+If you did not sign up, ignore this email.
+
+Thank you!

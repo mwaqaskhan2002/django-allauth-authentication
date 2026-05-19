@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load socialaccount %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+    <main class="page-center d-flex justify-content-center align-items-center">
+        <div class="container ">
+            <div class="row justify-content-center">
+                
+                <div class="col-11 col-sm-8 col-md-6 col-xl-4">
+                    {% if form.non_field_errors %}
+                        <small class="text-danger ms-1 mb-2 d-block">
+                            {{ form.non_field_errors|join:", " }}
+                        </small>
+                    {% endif %}
+                    
+                    <div class="card shadow p-4">
+                        <h2 class="text-center mb-4">Login</h2>
+
+
+                        <form action="{% url 'account_login' %}" method="post" class="">
+                            {% csrf_token %}
+                            <!-- Email -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text bg-transparent">
+                                    <i class="bi bi-person-fill"></i>
+                                </span>
+                                <div class="form-floating">
+                                    <input type="email" name="login" class="form-control" id="floatingInputGroup1" placeholder="Email" value="{{ form.login.value|default:'' }}">
+                                    <label for="floatingInputGroup1">Email</label>
+                                </div>
+                            </div>
+                            {% if form.login.errors %}
+                                <small class="text-danger ms-1 mb-2 d-block">
+                                    {{ form.login.errors|join:", " }}
+                                </small>
+                            {% endif %}
+
+                            <!-- Password -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text bg-transparent">
+                                    <i class="bi bi-lock-fill"></i>
+                                </span>
+                                <div class="form-floating">
+                                    <input type="password" name="password" class="form-control border-end-0" id="loginPass" placeholder="Password" value="{{ form.password.value|default:'' }}">
+                                    <label for="loginPass">Password</label>
+                                </div>
+                                <!-- Eye Icon for Toggle -->
+                                <span class="input-group-text bg-transparent border-start-0" onclick="togglePassword(this)" style="cursor: pointer;">
+                                    <i class="ri-eye-off-fill"></i>
+                                </span>
+                            </div>
+                            {% if form.password.errors %}
+                                <small class="text-danger ms-1 mb-2 d-block">
+                                    {{ form.password.errors|join:", " }}
+                                </small>
+                            {% endif %}
+
+                            <!-- Remember your Password -->
+                            <div class="col-12 d-flex flex-column flex-lg-row justify-content-between mb-5">
+                                <div class="form-check remember-me">
+                                    <input class="form-check-input" type="checkbox" id="gridCheck" name="remember">
+                                    <label class="form-check-label" for="gridCheck">
+                                        Remember me
+                                    </label>
+                                </div>
+                                <div class="forget-password text-end">
+                                    <a href="{% url 'account_reset_password' %}" class="text-decoration-none">Forget Password ?</a>
+                                </div>
+                            </div>
+                            <div class="login-button">
+                                <button type="submit" class="btn btn-primary col-12">Login</button>
+                            </div>
+
+
+                            <div class="d-flex align-items-center my-2">
+                                <div class="flex-grow-1 border-bottom"></div>
+                                <span class="mx-1 text-muted fw-bold text-uppercase" style="font-size: 0.8rem;">OR</span>
+                                <div class="flex-grow-1 border-bottom"></div>
+                            </div>
+                            <div class="d-flex flex-lg-row flex-column align-items-center justify-content-center col-12 gap-2">
+                                <a href="{% provider_login_url 'google' %}" class="google-login-button rounded w-100 py-2 px-3 fs-6 text-decoration-none d-inline-block text-center">
+                                    <i class="bi bi-google me-1"></i>Google</a>    
+                                {% comment %} <a href="{% provider_login_url 'github' %}" class="github-login-button rounded  w-100 py-2 px-3 fs-6 text-decoration-none d-inline-block text-center"><i
+                                        class="bi bi-github me-1"></i>Github</a> {% endcomment %}
+                                <a href="{% provider_login_url 'facebook' %}" class="facebook-login-button rounded  w-100 py-2 px-3 fs-6 text-decoration-none d-inline-block text-center"><i
+                                        class="bi bi-facebook me-1"></i>Facebook</a>
+                            </div>
+                        </form>
+                        <hr>
+
+                        <div class="text-center mt-2">
+                            <small> Don't have an account? <a href="{% url 'account_signup' %}">Sign Up</a></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+    

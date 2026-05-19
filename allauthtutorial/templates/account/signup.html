@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %} Sign Up {% endblock %}
+
+{% block content %}
+    <main class="page-center d-flex justify-content-center align-items-center">
+        <div class="container ">
+            <div class="row justify-content-center">
+
+                <div class="col-11 col-sm-8 col-md-6 col-xl-4">
+
+                    <div class="card shadow p-4">
+                        <h2 class="text-center mb-4">Sign Up</h2>
+                        <form action="{% url 'account_signup' %}" class="" method="post">
+                            {% csrf_token %}
+
+                            <!-- Username -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text bg-transparent">
+                                    <i class="bi bi-person-fill"></i>
+                                </span>
+                                <div class="form-floating">
+                                    <input type="text" name="username" id="floatingInputGroup1" class="form-control">
+                                    <label for="floatingInputGroup1">Username</label>
+                                </div>
+                            </div>
+                            {% if form.username.errors %}
+                                <small class="text-danger ms-1 mb-2 d-block">
+                                    {{ form.username.errors|join:", " }}</small>
+                            {% endif %}
+                            <!-- Email -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text bg-transparent">
+                                    <i class="bi bi-envelope-fill"></i>
+                                </span>
+                                <div class="form-floating">
+                                    <input type="email" name="email" id="floatingInputGroup1" class="form-control" 
+                                        placeholder="Email">
+                                    <label for="floatingInputGroup1">Email address</label>
+                                </div>
+                            </div>
+                            {% if form.email.errors %}
+                                <small class="text-danger ms-1 mb-2 d-block">
+                                    {{ form.email.errors|join:", " }}</small>
+                            {% endif %}
+
+                            <!-- Password -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text bg-transparent">
+                                    <i class="bi bi-lock-fill"></i>
+                                </span>
+                                <div class="form-floating">
+                                    <input type="password" name="password1" id="password1" class="form-control border-end-0" 
+                                        placeholder="Password">
+                                    <label for="password">Password</label>
+                                </div>
+                                <!-- Eye Icon for Toggle -->
+                                <span class="input-group-text bg-transparent border-start-0"
+                                    onclick="togglePassword(this)" style="cursor: pointer;">
+                                    <i class="ri-eye-off-fill"></i>
+                                </span>
+                            </div>
+
+                            {% if form.password1.errors %}
+                                <small class="text-danger ms-1 mb-2 d-block">
+                                    {{ form.password1.errors|join:", " }}</small>
+                            {% endif %}
+
+                            <ul class="small text-muted mb-3 ps-3">
+                                <li>Your password can’t be too similar to your other personal information.</li>
+                                <li>Your password must contain at least 8 characters.</li>
+                                <li>Your password can’t be a commonly used password.</li>
+                                <li>Your password can’t be entirely numeric.</li>
+                            </ul>
+
+                            <!-- Confirm Password -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text bg-transparent">
+                                    <i class="bi bi-lock-fill"></i>
+                                </span>
+                                <div class="form-floating">
+                                    <input type="password" name="password2" id="password2" class="form-control border-end-0" 
+                                        placeholder="Password">
+                                    <label for="password2">Confirm Password</label>
+                                </div>
+                                <!-- Eye Icon for Toggle -->
+                                <span class="input-group-text bg-transparent border-start-0"
+                                    onclick="togglePassword(this)" style="cursor: pointer;">
+                                    <i class="ri-eye-off-fill"></i>
+                                </span>
+                            </div>
+
+                            {% if form.password2.errors %}
+                                <small class="text-danger ms-1 mb-2 d-block">
+                                    {{ form.password2.errors|join:", " }}</small>
+                            {% endif %}
+
+
+                            <div class="login-button">
+                                <button type="submit" class="btn btn-primary col-12">Sign Up</button>
+                            </div>
+                        </form>
+                        <div class="text-center mt-4">
+                            <small>Already have an account? <a href="{% url 'account_login' %}">Login</a></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %} Login Cancelled {% endblock %}
+
+{% block content %}
+    <main class="page-center d-flex justify-content-center align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+
+                <div class="col-11 col-sm-8 col-md-6 col-xl-4">
+                    <div class="card shadow p-4">
+                        <div class="invalid-icon">
+                            <i class="bi bi-exclamation-circle-fill"></i>
+                        </div>
+
+                        <h2 class="text-center my-4">Login Cancelled</h2>
+                        <p class="card-text text-center">You decided to cancel logging in to our site using one of your existing accounts</p>
+                    
+                        <hr>
+                        <div class="text-center">
+                            <small>If this was a mistake, please proceed to
+                                <a href="{% url 'account_login' %}">Login</a>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+{% endblock %}
+
+
+
+Login Cancelled
+You decided to cancel logging in to our site using one of your existing accounts. 
+If this was a mistake, please proceed to sign in.

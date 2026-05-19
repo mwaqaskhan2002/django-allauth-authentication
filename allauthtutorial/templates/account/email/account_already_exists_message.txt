@@ -1,0 +1,8 @@
+Hello from {{ site_name }}!
+
+You tried to signup with {{ email }}, but an account already exists.
+
+If you forgot your password, please use the password reset procedure to recover your account:
+{{ password_reset_url }}
+
+Thank you!

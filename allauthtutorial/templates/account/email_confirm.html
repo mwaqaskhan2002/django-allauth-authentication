@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %} Confirm Email {% endblock %}
+
+{% block content %}
+<main class="page-center d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-11 col-sm-8 col-md-6 col-xl-4">
+
+                {% if confirmation %}
+
+                    {# ✅ VALID LINK #}
+                    <div class="card shadow p-4">
+                        <div class="verification-icon text-center">
+                            <i class="bi bi-check-circle-fill"></i>
+                        </div>
+                        <h2 class="text-center my-4">Confirm Email Address</h2>
+                        <p class="card-text text-center">
+                            Please confirm that
+                            <strong>{{ confirmation.email_address.email }}</strong>
+                            is your email address.
+                        </p>
+                        <form method="POST" action="{% url 'account_confirm_email' confirmation.key %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary col-12">
+                                Confirm
+                            </button>
+                        </form>
+                    </div>
+
+                {% else %}
+
+
+                    <div class="card shadow p-4">
+                        <div class="invalid-icon text-center">
+                            <i class="bi bi-exclamation-circle-fill text-danger"></i>
+                        </div>
+                        <h2 class="text-center my-4">Invalid Link</h2>
+                        <p class="card-text text-center">
+                            This email confirmation link expired or is invalid.
+                            Please issue a new email confirmation request.
+                        </p>
+                        <a href="{% url 'account_login' %}" 
+                           class="btn btn-danger col-12">
+                            Request New Link
+                        </a>
+                    </div>
+
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

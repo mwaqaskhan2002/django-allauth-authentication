@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load socialaccount %}
+
+{% block title %} Social Signup {% endblock %}
+
+{% block content %}
+<main class="page-center d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-11 col-sm-8 col-md-6 col-xl-4">
+
+                {# Error Block #}
+                {% if form.errors %}
+                    <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show mb-3 py-2 px-3" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        <div class="small">
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <div>{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <button type="button" class="btn-close ms-auto"
+                                data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                    </div>
+                {% endif %}
+
+                <div class="card shadow p-4">
+                    <h2 class="text-center mb-2">Complete Signup</h2>
+                    <p class="text-center text-muted small mb-4">
+                        Complete your registration using your social account
+                    </p>
+
+                    <form method="POST" action="{% url 'socialaccount_signup' %}">
+                        {% csrf_token %}
+
+                        {# Email #}
+                        <div class="input-group mb-3">
+                            <span class="input-group-text bg-transparent">
+                                <i class="bi bi-envelope-fill"></i>
+                            </span>
+                            <div class="form-floating">
+                                <input type="email"
+                                       name="email"
+                                       class="form-control"
+                                       id="email"
+                                       placeholder="Email"
+                                       value="{{ form.email.value|default:'' }}">
+                                <label for="email">Email address</label>
+                            </div>
+                        </div>
+                        {% if form.email.errors %}
+                            <small class="text-danger ms-1 mb-2 d-block">
+                                {{ form.email.errors|join:", " }}
+                            </small>
+                        {% endif %}
+
+                        {# Submit #}
+                        <button type="submit" class="btn btn-primary col-12">
+                            Complete Signup
+                        </button>
+
+                    </form>
+
+                    <hr>
+                    <div class="text-center">
+                        <small>Already have an account?
+                            <a href="{% url 'account_login' %}">Login</a>
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+<h2>Welcome, {{ user.username }}! 👋</h2>
+<p class="text-muted">You are logged in as 
+    <strong>{{ user.email }}</strong>
+</p>
+<hr>
+<a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
+
+
+<div class="modal fade" id="logoutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="logoutModalLabel">
+                    Sign Out
+                </h1>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 class="fs-5">Are you sure you want to sign out?</h3>
+            </div>
+            <div class="modal-footer">
+
+                {# ✅ POST form — allauth logout ke liye zaroori #}
+                <form method="POST" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Sign Out</button>
+                </form>
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
