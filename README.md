@@ -4,17 +4,16 @@ A complete authentication system built with Django and django-allauth library.
 
 ## 🚀 Features
 
-- ✅ Email/Password Authentication
-- ✅ Email Verification (Mandatory)
-- ✅ Password Reset via Email
-- ✅ Google OAuth Login
-- ✅ GitHub OAuth Login
-- ✅ Facebook OAuth Login
-- ✅ Social Account Connections
-- ✅ Custom Email Templates
-- ✅ Custom Error Messages
-- ✅ Toast Notifications
-- ✅ Responsive Bootstrap UI
+-  Email/Password Authentication
+-  Email Verification (Mandatory)
+-  Password Reset via Email
+-  Google OAuth Login
+-  Facebook OAuth Login
+-  Social Account Connections
+-  Custom Email Templates
+-  Custom Error Messages
+-  Toast Notifications
+-  Responsive Bootstrap UI
 
 ---
 
@@ -63,10 +62,6 @@ EMAIL_HOST_PASSWORD=your_app_password
 GOOGLE_CLIENT_ID=your_google_client_id
 GOOGLE_CLIENT_SECRET=your_google_client_secret
 
-# GitHub OAuth
-GITHUB_CLIENT_ID=your_github_client_id
-GITHUB_CLIENT_SECRET=your_github_client_secret
-
 # Facebook OAuth
 FACEBOOK_CLIENT_ID=your_facebook_app_id
 FACEBOOK_CLIENT_SECRET=your_facebook_app_secret
@@ -98,8 +93,6 @@ python manage.py runserver
 | `EMAIL_HOST_PASSWORD` | Gmail App Password |
 | `GOOGLE_CLIENT_ID` | Google OAuth Client ID |
 | `GOOGLE_CLIENT_SECRET` | Google OAuth Secret |
-| `GITHUB_CLIENT_ID` | GitHub OAuth Client ID |
-| `GITHUB_CLIENT_SECRET` | GitHub OAuth Secret |
 | `FACEBOOK_CLIENT_ID` | Facebook App ID |
 | `FACEBOOK_CLIENT_SECRET` | Facebook App Secret |
 
@@ -154,28 +147,6 @@ python manage.py runserver
 
 ---
 
-### <img src="https://cdn.simpleicons.org/github" width="20" height="20"> GitHub:
-
-1. Go to [GitHub Developer Settings](https://github.com/settings/developers)
-2. Click **New OAuth App**
-3. Fill in the details:
-```
-   Homepage URL: http://127.0.0.1:8000
-   Callback URL: http://127.0.0.1:8000/accounts/github/login/callback/
-```
-4. Click **Register Application**
-5. Copy **Client ID** and **Client Secret**
-6. Add via Django Admin at `http://127.0.0.1:8000/admin/`:
-   - Go to **Social Applications** → **Add**
-   - Provider: `GitHub`
-   - Name: `GitHub`
-   - Client ID: `your_client_id`
-   - Secret Key: `your_client_secret`
-   - Sites: `127.0.0.1:8000` → move to **Chosen Sites**
-   - Click **Save**
-
----
-
 ### <img src="https://cdn.simpleicons.org/facebook/1877F2" width="20" height="20"> Facebook:
 
 1. Go to [Meta Developer Portal](https://developers.facebook.com/)
@@ -214,7 +185,6 @@ python manage.py runserver
 | Provider | Local URL | Production URL |
 |---|---|---|
 | **Google** | `http://127.0.0.1:8000` | `https://yourdomain.com` |
-| **GitHub** | `http://127.0.0.1:8000` | `https://yourdomain.com` |
 | **Facebook** | `http://localhost:8000` | `https://yourdomain.com` |
 
 > ⚠️ For production, always use `HTTPS` URLs in all OAuth providers!
