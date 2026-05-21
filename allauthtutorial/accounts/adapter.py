@@ -2,9 +2,7 @@ from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from allauth.account.models import EmailAddress 
 from django.shortcuts import resolve_url 
-
 from django.contrib.auth import get_user_model
-
 
 User = get_user_model()
 
@@ -26,12 +24,10 @@ class SocialAccountAdapter(DefaultSocialAccountAdapter):
         
         if sociallogin.is_existing:
             user = sociallogin.user
-            # ✅ objects.get_or_create
             email_address, created = EmailAddress.objects.get_or_create(
                 user=user, 
                 email=email
             )
-            # ✅ verified field hai — () nahi
             if not email_address.verified:
                 email_address.verified = True
                 email_address.save()
@@ -39,12 +35,11 @@ class SocialAccountAdapter(DefaultSocialAccountAdapter):
     def save_user(self, request, sociallogin, form=None):
         user = super().save_user(request, sociallogin, form)
         email = user.email
-        # ✅ objects.get_or_create
         email_address, created = EmailAddress.objects.get_or_create(
             user=user, 
             email=email
         )
-        # ✅ verified field hai — () nahi
+ 
         if not email_address.verified:
             email_address.verified = True
             email_address.save()
